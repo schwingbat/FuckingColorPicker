@@ -18,6 +18,7 @@
   "author": "Tony McCoy <tony@ratwizard.io>",
   "license": "MIT",
   "dependencies": {
+    "open": "0.0.5",
     "tinycolor2": "^1.4.1",
     "user-media-screenshot": "^1.0.2"
   },
@@ -28,10 +29,14 @@
   "build": {
     "appId": "me.tonymccoy.fcp",
     "win": {
-      "target": ["portable"]
+      "target": [
+        "portable"
+      ]
     },
     "linux": {
-      "target": ["AppImage"]
+      "target": [
+        "AppImage"
+      ]
     }
   }
 }

@@ -3,6 +3,7 @@ const screenshot = require('user-media-screenshot');
 const { desktopCapturer } = require('electron');
 const fs = require('fs');
 const path = require('path');
+const open = require('open');
 
 let DEBUG = process.env.DEBUG || false;
 
@@ -285,6 +286,14 @@ window.addEventListener('mousedown', e => {
         document.execCommand('copy');
 
         notify(`${ kind } value copied...`);
+    } else if (e.target.id === 'orbit-open') {
+        try {
+            let hex = document.querySelector('#hex').textContent;
+            open(`http://tonymccoy.me/orbit/${ hex }`);
+        } catch (err) {
+            e.error(err);
+            notify(`Well... that didn't work.`)
+        }
     }
 });
 
