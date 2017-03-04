@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fucking Color Picker</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div id="loader">
+        <span id="loader-message">Initializing hacky bullshit</span><span id="loader-dots"><span>.</span><span>.</span><span>.</span></span>
+    </div>
+    <div id="app" class="disabled">
+        <video id="screenshot-renderer"></video>
+        <textarea id="secret-copy-thing"></textarea>
+        <header>
+            <button id="pick-button" class="button">[pick]</button>
+            <span id="notif"></span>
+        </header>
+        <main>
+            <div id="preview-swatch-box">
+                <canvas id="color-preview"></canvas>
+                <div id="active-swatch"></div>
+            </div>
+            <table id="color-table">
+                <tbody>
+                    <tr>
+                        <td class="label">HEX</td>
+                        <td><button class="button copy-button">[copy]</button></td>
+                        <td class="color" id="hex">#000000</td>
+                    </tr>
+                    <tr>
+                        <td class="label">RGB</td>
+                        <td><button class="button copy-button">[copy]</button></td>
+                        <td class="color" id="rgb">rgb(0, 0, 0)</td>
+                    </tr>
+                    <tr>
+                        <td class="label">HSL</td>
+                        <td><button class="button copy-button">[copy]</button></td>
+                        <td class="color" id="hsl">hsl(0, 0, 0)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+        <footer>
+            <section id="swatch-grid"></section>
+        </footer>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

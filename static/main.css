@@ -1,0 +1,166 @@
+@font-face {
+    font-family: 'Input';
+    src: url('./fonts/Input-Regular.ttf');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Input';
+    src: url('./fonts/Input-Bold.ttf');
+    font-weight: bold;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+body {
+    --font: 'Input', monospace;
+    --accent: #744da7;
+    --text: #eee;
+    --background: #222;
+
+    --active: #bababa;
+    --active-text: #222;
+
+    font-size: 13px;
+
+    font-family: var(--font);
+    background: var(--background);
+    color: var(--text);
+}
+
+#app {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.disabled {
+    display: none !important;
+}
+
+.button {
+    font-family: var(--font);
+    border: 0;
+    outline: 0;
+    -webkit-appearance: none;
+    background: transparent;
+    color: var(--text);
+    line-height: 1.5;
+    padding: 0 0.15em;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: var(--active);
+    color: var(--active-text);
+}
+
+header {
+    flex: 0 0 28px;
+
+    padding: 6px;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+main {
+    flex: 1 1;
+
+    display: flex;
+    flex-flow: row nowrap;
+
+    align-items: center;
+
+    padding: 0 6px;
+}
+
+footer {
+    flex: 0 0 30px;
+
+    padding: 6px;
+}
+
+#loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#secret-copy-thing {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
+#screenshot-renderer {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    z-index: -5;
+    image-rendering: pixelated;
+}
+
+#color-preview {
+    background: #000;
+    flex: 0 0 80px;
+    width: 80px;
+    height: 80px;
+    margin-right: 0.5em;
+    image-rendering: pixelated;
+}
+
+#active-swatch {
+    width: 80px;
+    height: 10px;
+    background: var(--active);
+}
+
+#color-table {
+    font-size: 13px;
+}
+
+#color-table .label {
+    font-weight: bold;
+    color: #ccc;
+}
+
+#color-table .color {
+    position: relative;
+}
+
+#color-table .copy-button {
+    margin: 0 0.35em;
+}
+
+#swatch-grid {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+#swatch-grid .swatch {
+    flex-basis: 7%;
+    width: 7%;
+    padding-bottom: 7%;
+}
