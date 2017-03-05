@@ -12,7 +12,7 @@ function createWindow() {
     // Create the browser window.
     win = new BrowserWindow({
         width: (DEBUG) ? 800 : 370,
-        height: (DEBUG) ? 400 : 200,
+        height: (DEBUG) ? 450 : 230,
         icon: path.join(__dirname, 'static', 'logo.png'),
         title: 'Fucking Color Picker',
     });

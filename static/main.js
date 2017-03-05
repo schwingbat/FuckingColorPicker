@@ -6,6 +6,11 @@ const path = require('path');
 const open = require('open');
 
 let DEBUG = process.env.DEBUG || false;
+let options = {
+    hexHash: true,
+    colorStyle: 'css',
+    rgbScale: 'int255'
+}
 
 const c = {
     log(...messages) { if (DEBUG) console.log(...messages); },
@@ -31,6 +36,9 @@ const el = {
     textArea: document.querySelector('#secret-copy-thing'),
 
     swatchGrid: document.querySelector('#swatch-grid'),
+
+    optionsMenu: document.querySelector('#options-menu'),
+    optionsForm: document.querySelector('#options-form'),
 };
 
 // Load swatches from localStorage.
@@ -76,6 +84,23 @@ desktopCapturer.getSources({ types: ['screen'] }, (err, sources) => {
     
     return;
 });
+
+// Apply options
+(function() {
+    try {
+        options = JSON.parse( localStorage.getItem('options') );
+        let activeColor = localStorage.getItem('swatches');
+        if (activeColor) {
+            activeColor = activeColor.split(' ').pop();
+        } else {
+            activeColor = '#000000';
+        }
+        setActiveColor( tinycolor(activeColor) );
+        applyOptions(options);
+    } catch (err) {
+        console.warn('Unable to load settings', err);
+    }
+})();
 
 // Load loading messages
 (function() {
@@ -210,14 +235,46 @@ function getCenterPixel() {
     };
 }
 
+function fmt(color) {
+    const colors = {};
+
+    options = options || {};
+
+    let rgb = color.toRgb();
+    let hex = color.toHexString();
+    let hsl = color.toHsl();
+
+    switch (options.rgbStyle) {
+    case 'float':
+        colors.rgb = (rgb.r / 255).toFixed(3) + ', ' + (rgb.g / 255).toFixed(3) + ', ' +(rgb.b / 255).toFixed(3);
+        break;
+    case 'color32':
+        colors.rgb = Math.round(rgb.r) + ', ' + Math.round(rgb.b) + ', ' + Math.round(rgb.g);
+        break;
+    case 'css': // Default
+    default:
+        colors.rgb = color.toRgbString();
+        break;
+    }
+
+    colors.hsl = color.toHslString();
+    colors.hex = options.hexHash ? hex : hex.slice(1);
+
+    return colors;
+}
+
 function setActiveColor(color) {
     requestAnimationFrame(() => {
         document.body.style.setProperty('--active', color.toHexString());
         document.body.style.setProperty('--active-text', color.isDark() ? '#eee' : '#222');
 
-        el.HEX.textContent = color.toHexString();
-        el.RGB.textContent = color.toRgbString();
-        el.HSL.textContent = color.toHslString();
+        let col = fmt(color);
+
+        c.log(c);
+
+        el.HEX.textContent = col.hex;
+        el.RGB.textContent = col.rgb;
+        el.HSL.textContent = col.hsl;
     });
 }
 
@@ -268,9 +325,53 @@ function notify(message) {
     }, 5000);
 }
 
+function readOptions() {
+    const form = el.optionsForm;
+
+    return {
+        hexHash: !!form.elements['hexHash'].checked,
+        showOrbit: !!form.elements['showOrbit'].checked,
+        rgbStyle: form.elements['rgbStyle'].value,
+    }
+}
+
+function applyOptions(options) {
+    const form = el.optionsForm;
+
+    if (options.hexHash) {
+        form.elements['hexHash'].setAttribute('checked', 'checked');
+    } else {
+        form.elements['hexHash'].removeAttribute('checked');
+    }
+
+    if (options.showOrbit) {
+        form.elements['showOrbit'].setAttribute('checked', 'checked');
+    } else {
+        form.elements['showOrbit'].removeAttribute('checked');
+    }
+
+    form.elements['rgbStyle'].value = options.rgbStyle || 'css';
+
+    document.querySelector('#orbit-open').classList[ options.showOrbit ? 'remove' : 'add' ]('disabled');
+}
+
 /*
     Events
 */
+
+el.optionsMenu.addEventListener('submit', e => {
+    e.preventDefault();
+    options = readOptions();
+    c.log(options);
+
+    // Refresh to update color labels.
+    setActiveColor( tinycolor(getCenterPixel()) );
+    applyOptions(options);
+
+    localStorage.setItem('options', JSON.stringify(options));
+
+    el.optionsMenu.classList.add('disabled');
+});
 
 window.addEventListener('resize', () => {
     c.log(`${window.innerWidth}*${window.innerHeight}`);
@@ -294,6 +395,8 @@ window.addEventListener('mousedown', e => {
             e.error(err);
             notify(`Well... that didn't work.`)
         }
+    } else if (e.target.id === 'options-open') {
+        el.optionsMenu.classList.remove('disabled');
     }
 });
 
