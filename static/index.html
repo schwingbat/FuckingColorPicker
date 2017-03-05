@@ -20,6 +20,7 @@
                 <button id="orbit-open" class="button">[orbit]</button>
             </div>
             <span id="notif"></span>
+            <button id="options-open" class="button">[opts]</button>
         </header>
         <main>
             <div id="preview-swatch-box">
@@ -49,6 +50,46 @@
         <footer>
             <section id="swatch-grid"></section>
         </footer>
+
+        <div id="options-menu" class="disabled">
+            <form id="options-form">
+                <input type="submit" id="close-options" class="button" value="[close]">
+
+                <article>
+                    <span class="header-label">GENERAL</span>
+
+                    <ul class="options-set">
+                        <li>
+                            <input type="checkbox" class="checkbox" name="hexHash" checked>
+                            <label for="hexHash">Include '#' for HEX colors</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" class="checkbox" name="showOrbit" checked>
+                            <label for="showOrbit">Show [orbit] button</label>
+                        </li>
+                    </ul>
+                </article>
+
+                <article>
+                    <span class="header-label">RGB STYLE</span>
+
+                    <ul class="options-set">
+                        <li>
+                            <input type="radio" class="checkbox" name="rgbStyle" value="css" checked>
+                            <label for="rgbStyle">CSS &mdash; rgb(128, 128, 128)</label>
+                        </li>
+                        <li>
+                            <input type="radio" class="checkbox" name="rgbStyle" value="color32">
+                            <label for="rgbStyle">Color32 &mdash; 128, 128, 128</label>
+                        </li>
+                        <li>
+                            <input type="radio" class="checkbox" name="rgbStyle" value="float">
+                            <label for="rgbStyle">Float &mdash; 0.5, 0.5, 0.5</label>
+                        </li>
+                    </ul>
+                </article>
+            </form>
+        </div>
     </div>
 
     <script src="main.js"></script>
