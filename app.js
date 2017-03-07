@@ -5,19 +5,19 @@ const fs = require('fs');
 
 const DEBUG = process.env.DEBUG || process.argv.includes('--debug') || process.argv.includes('-d') || false;
 
-let state;
-
-try {
-    state = JSON.parse(fs.readFileSync(path.join(__dirname, 'window-state'), 'utf-8'));
-} catch (err) {
-    state = {};
-}
-
 // Keep a global reference of the window object, so it doesn't get
 // garbage collected.
 let win;
 
 function createWindow() {
+    let state;
+
+    try {
+        state = JSON.parse(fs.readFileSync(path.join(__dirname, 'window-state'), 'utf-8'));
+    } catch (err) {
+        state = {};
+    }
+
     let width = 370;
     let height = 230;
 
@@ -51,7 +51,9 @@ function createWindow() {
 
     win.on('close', (e) => {
         // Save window state to restore from next time.
-        fs.writeFileSync('window-state', JSON.stringify(win.getBounds()));
+        fs.writeFile('window-state', JSON.stringify(win.getBounds()), (err) => {
+            if (err) { console.log(err); }
+        });
     });
 
     win.on('closed', (w) => {
