@@ -61,6 +61,7 @@ body {
     line-height: 1.5;
     padding: 0 0.15em;
     cursor: pointer;
+    font-size: 13px;
 }
 
 .button:hover {
@@ -134,10 +135,6 @@ footer {
     width: 80px;
     height: 10px;
     background: var(--active);
-}
-
-#color-table {
-    font-size: 13px;
 }
 
 #color-table .label {
