@@ -156,6 +156,10 @@ footer {
 #swatch-grid {
     display: flex;
     flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
+#swatch-grid.full {
     justify-content: space-between;
 }
 
@@ -163,6 +167,11 @@ footer {
     flex-basis: 7%;
     width: 7%;
     padding-bottom: 7%;
+    margin-right: 1.4%;
+}
+
+#swatch-grid.full .swatch {
+    margin-right: 0;
 }
 
 #options-menu {

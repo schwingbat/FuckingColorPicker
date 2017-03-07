@@ -1,46 +1,68 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
+const fs = require('fs');
 
 const DEBUG = process.env.DEBUG || process.argv.includes('--debug') || process.argv.includes('-d') || false;
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
+let state;
+
+try {
+    state = JSON.parse(fs.readFileSync(path.join(__dirname, 'window-state'), 'utf-8'));
+} catch (err) {
+    state = {};
+}
+
+// Keep a global reference of the window object, so it doesn't get
+// garbage collected.
 let win;
 
 function createWindow() {
-    // Create the browser window.
+    let width = 370;
+    let height = 230;
+
+    if (state.width) {
+        width = state.width;
+    }
+
+    if (state.height) {
+        height = state.height;
+    }
+
     win = new BrowserWindow({
-        width: (DEBUG) ? 800 : 370,
-        height: (DEBUG) ? 450 : 230,
+        x: state.x,
+        y: state.y,
+        width: width,
+        height: height,
         icon: path.join(__dirname, 'static', 'logo.png'),
         title: 'Fucking Color Picker',
+        backgroundColor: '#222222',
+        show: false,
     });
 
     win.setMenu(null);
-
-    // and load the index.html of the app.
     win.loadURL(url.format({
         pathname: path.join(__dirname, 'static/index.html'),
         protocol: 'file:',
         slashes: true
     }));
 
-    // Open the DevTools.
     if (DEBUG) win.webContents.openDevTools();
 
-    // Emitted when the window is closed.
-    win.on('closed', () => {
-        // Dereference the window object, usually you would store windows
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
+    win.on('close', (e) => {
+        // Save window state to restore from next time.
+        fs.writeFileSync('window-state', JSON.stringify(win.getBounds()));
+    });
+
+    win.on('closed', (w) => {
         win = null;
+    });
+
+    win.once('ready-to-show', () => {
+        win.show();
     });
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
 
 // Quit when all windows are closed.
@@ -59,6 +81,3 @@ app.on('activate', () => {
         createWindow();
     }
 });
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.

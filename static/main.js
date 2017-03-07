@@ -296,6 +296,12 @@ function addSwatch(color) {
             grid.removeChild(grid.lastChild);
         }
 
+        if (grid.children.length >= 12) {
+            grid.classList.add('full');
+        } else {
+            grid.classList.remove('full');
+        }
+
         try {
             let sw = '';
             for (let i = 0; i < children.length; i++) {
