@@ -249,7 +249,7 @@ function fmt(color) {
         colors.rgb = (rgb.r / 255).toFixed(3) + ', ' + (rgb.g / 255).toFixed(3) + ', ' +(rgb.b / 255).toFixed(3);
         break;
     case 'color32':
-        colors.rgb = Math.round(rgb.r) + ', ' + Math.round(rgb.b) + ', ' + Math.round(rgb.g);
+        colors.rgb = Math.round(rgb.r) + ', ' + Math.round(rgb.g) + ', ' + Math.round(rgb.b);
         break;
     case 'css': // Default
     default:
