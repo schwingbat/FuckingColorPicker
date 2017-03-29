@@ -7,7 +7,7 @@ I built a new PC, and after years of Macness I was baffled to not find any sort 
 
 ## Downloads
 
-Downloads are available at [tonymccoy.me/projects/orbit](http://www.tonymccoy.me/projects/orbit)
+Downloads are available at [tonymccoy.me/projects/fcp](http://www.tonymccoy.me/projects/fcp)
 
 ## Features
 
