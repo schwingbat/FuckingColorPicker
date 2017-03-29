@@ -1,18 +1,7 @@
 # Fucking Color Picker
 ### Because sometimes you just need a fucking color picker...
 
----
-
-#### Windows
-![FCP on Windows](assets/screenshots/fcp-windows.png | width=300)
-
-#### Linux
-![FCP on Linux](assets/screenshots/fcp-ubuntu.png | width=300)
-
-#### macOS
-![FCP on Mac](assets/screenshots/fcp-mac.png | width=300)
-
----
+![](assets/screenshots/all-screens.png)
 
 I built a new PC, and after years of Macness I was baffled to not find any sort of Windows equivalent of Digital Color Meter. That issue is now resolved. You're welcome.
 
