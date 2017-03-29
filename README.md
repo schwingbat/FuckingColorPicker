@@ -19,7 +19,7 @@ Colors come in CSS format by default since that's what I do all day, but there a
 
 ### Open in Orbit
 
-I also made this other thing called Orbit, which is a web-based tool for finding and tweaking colors. As FCP has no color alteration powers of its own, I find it helpful when the color you picked is close to but not exactly what you want. Just click the `[orbit]` button to open it and tweak to your heart's content. Or turn the button off in the `[opts]` menu if you don't like product tie-ins (open source though they may be).
+I also made this other thing called [Orbit](http://www.tonymccoy.me/orbit), which is a web-based tool for finding and tweaking colors. As FCP has no color alteration powers of its own, I find it helpful when the color you picked is close to but not exactly what you want. Just click the `[orbit]` button to open it and tweak to your heart's content. Or turn the button off in the `[opts]` menu if you don't like product tie-ins (open source though they may be).
 
 ![FCP and Orbit](assets/screenshots/fcp-and-orbit.png)
 
