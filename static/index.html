@@ -1,97 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Fucking Color Picker</title>
-    <link rel="stylesheet" href="main.css">
-</head>
-<body>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
     <div id="loader">
-        <span id="loader-message">Initializing hacky bullshit</span><span id="loader-dots"><span>.</span><span>.</span><span>.</span></span>
+      <span id="loader-message">Initializing hacky bullshit</span
+      ><span id="loader-dots"><span>.</span><span>.</span><span>.</span></span>
     </div>
     <div id="app" class="disabled">
-        <video id="screenshot-renderer"></video>
-        <textarea id="secret-copy-thing"></textarea>
-        <header>
-            <div>
-                <button id="pick-button" class="button">[pick]</button>
-                <button id="orbit-open" class="button">[orbit]</button>
-            </div>
-            <span id="notif"></span>
-            <button id="options-open" class="button">[opts]</button>
-        </header>
-        <main>
-            <div id="preview-swatch-box">
-                <canvas id="color-preview"></canvas>
-                <div id="active-swatch"></div>
-            </div>
-            <table id="color-table">
-                <tbody>
-                    <tr>
-                        <td class="label">HEX</td>
-                        <td><button class="button copy-button">[copy]</button></td>
-                        <td class="color" id="hex">#000000</td>
-                    </tr>
-                    <tr>
-                        <td class="label">RGB</td>
-                        <td><button class="button copy-button">[copy]</button></td>
-                        <td class="color" id="rgb">rgb(0, 0, 0)</td>
-                    </tr>
-                    <tr>
-                        <td class="label">HSL</td>
-                        <td><button class="button copy-button">[copy]</button></td>
-                        <td class="color" id="hsl">hsl(0, 0, 0)</td>
-                    </tr>
-                </tbody>
-            </table>
-        </main>
-        <footer>
-            <section id="swatch-grid"></section>
-        </footer>
-
-        <div id="options-menu" class="disabled">
-            <form id="options-form">
-                <input type="submit" id="close-options" class="button" value="[close]">
-
-                <article>
-                    <span class="header-label">GENERAL</span>
-
-                    <ul class="options-set">
-                        <li>
-                            <input type="checkbox" class="checkbox" name="hexHash" checked>
-                            <label for="hexHash">Include '#' for HEX colors</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" class="checkbox" name="showOrbit" checked>
-                            <label for="showOrbit">Show [orbit] button</label>
-                        </li>
-                    </ul>
-                </article>
-
-                <article>
-                    <span class="header-label">RGB STYLE</span>
-
-                    <ul class="options-set">
-                        <li>
-                            <input type="radio" class="checkbox" name="rgbStyle" value="css" checked>
-                            <label for="rgbStyle">CSS &mdash; rgb(128, 128, 128)</label>
-                        </li>
-                        <li>
-                            <input type="radio" class="checkbox" name="rgbStyle" value="color32">
-                            <label for="rgbStyle">Color32 &mdash; 128, 128, 128</label>
-                        </li>
-                        <li>
-                            <input type="radio" class="checkbox" name="rgbStyle" value="float">
-                            <label for="rgbStyle">Float &mdash; 0.5, 0.5, 0.5</label>
-                        </li>
-                    </ul>
-                </article>
-            </form>
+      <video id="screenshot-renderer"></video>
+      <textarea id="secret-copy-thing"></textarea>
+      <header>
+        <div>
+          <button id="pick-button" class="button">[pick]</button>
+          <button id="orbit-open" class="button">[orbit]</button>
         </div>
+        <span id="notif"></span>
+        <button id="options-open" class="button">[opts]</button>
+      </header>
+      <main>
+        <div id="preview-swatch-box">
+          <canvas id="color-preview"></canvas>
+          <div id="active-swatch"></div>
+        </div>
+        <table id="color-table">
+          <tbody>
+            <tr>
+              <td class="label">HEX</td>
+              <td><button class="button copy-button">[copy]</button></td>
+              <td class="color" id="hex">#000000</td>
+            </tr>
+            <tr>
+              <td class="label">RGB</td>
+              <td><button class="button copy-button">[copy]</button></td>
+              <td class="color" id="rgb">rgb(0, 0, 0)</td>
+            </tr>
+            <tr>
+              <td class="label">HSL</td>
+              <td><button class="button copy-button">[copy]</button></td>
+              <td class="color" id="hsl">hsl(0, 0, 0)</td>
+            </tr>
+          </tbody>
+        </table>
+      </main>
+      <footer>
+        <section id="swatch-grid"></section>
+      </footer>
+
+      <div id="options-menu" class="disabled">
+        <form id="options-form">
+          <input
+            type="submit"
+            id="close-options"
+            class="button"
+            value="[close]"
+          />
+
+          <article>
+            <span class="header-label">GENERAL</span>
+
+            <ul class="options-set">
+              <li>
+                <input
+                  type="checkbox"
+                  class="checkbox"
+                  name="hexHash"
+                  checked
+                />
+                <label for="hexHash">Include '#' for HEX colors</label>
+              </li>
+              <li>
+                <input
+                  type="checkbox"
+                  class="checkbox"
+                  name="showOrbit"
+                  checked
+                />
+                <label for="showOrbit">Show [orbit] button</label>
+              </li>
+            </ul>
+          </article>
+
+          <article>
+            <span class="header-label">RGB STYLE</span>
+
+            <ul class="options-set">
+              <li>
+                <input
+                  type="radio"
+                  class="checkbox"
+                  name="rgbStyle"
+                  value="css"
+                  checked
+                />
+                <label for="rgbStyle">CSS &mdash; rgb(128, 128, 128)</label>
+              </li>
+              <li>
+                <input
+                  type="radio"
+                  class="checkbox"
+                  name="rgbStyle"
+                  value="color32"
+                />
+                <label for="rgbStyle">Color32 &mdash; 128, 128, 128</label>
+              </li>
+              <li>
+                <input
+                  type="radio"
+                  class="checkbox"
+                  name="rgbStyle"
+                  value="float"
+                />
+                <label for="rgbStyle">Float &mdash; 0.5, 0.5, 0.5</label>
+              </li>
+            </ul>
+          </article>
+        </form>
+      </div>
     </div>
 
     <script src="main.js"></script>
-</body>
+  </body>
 </html>
